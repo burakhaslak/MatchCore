@@ -1,0 +1,61 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="tr">
+@await Component.InvokeAsync("_StandingHeadComponentPartial")
+<body>
+    <!-- NAVBAR -->
+    @await Component.InvokeAsync("_StandingNavbarComponentPartial")
+    <!-- PAGE HEADER -->
+    @await Component.InvokeAsync("_StandingPageHeaderComponentPartial")
+    <!-- MAIN -->
+    <main>
+        <div class="wrap">
+            <div class="tbl-wrap">
+                <!-- TOP STAT CARDS -->
+                @await Component.InvokeAsync("_StandingTopStatisticComponentPartial")
+                <!-- TABLE -->
+                @await Component.InvokeAsync("_StandingTableComponentPartial")
+             
+            </div>
+        </div>
+    </main>
+    <!-- FOOTER -->
+    @await Component.InvokeAsync("_StandingFooterComponentPartial")
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Mobile nav
+        const tog = document.getElementById('tog');
+        const mob = document.getElementById('mobMenu');
+        tog.addEventListener('click', () => {
+            mob.classList.toggle('open');
+            tog.innerHTML = mob.classList.contains('open')
+                ? '<i class="bi bi-x-lg"></i>' : '<i class="bi bi-list"></i>';
+        });
+
+        // Navbar shadow
+        window.addEventListener('scroll', () => {
+            document.querySelector('.nb').style.boxShadow =
+                window.scrollY > 8 ? '0 4px 32px rgba(0,0,0,.7)' : '0 2px 24px rgba(0,0,0,.5)';
+        });
+
+        // Row animate in (Bunu kesinlikle tutuyoruz, çok şık duruyor)
+        function animateRows() {
+            const rows = document.querySelectorAll('.std-row');
+            rows.forEach((r, i) => {
+                r.style.opacity = '0';
+                r.style.transform = 'translateY(10px)';
+                setTimeout(() => {
+                    r.style.transition = 'opacity .3s ease, transform .3s ease';
+                    r.style.opacity = '1';
+                    r.style.transform = 'translateY(0)';
+                }, 30 + i * 28);
+            });
+        }
+
+        animateRows();
+    </script>
+</body>
+</html>

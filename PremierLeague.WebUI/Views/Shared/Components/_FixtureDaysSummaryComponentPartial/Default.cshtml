@@ -1,0 +1,57 @@
+﻿@model List<PremierLeague.DtoLayer.FixtureDtos.FixtureDayGroupDto>
+
+@foreach (var dayGroup in Model)
+{
+    <div class="day-group">
+
+        <!-- GÜN BAŞLIĞI (Cuma, Cumartesi vb.) -->
+        <div class="day-header">
+            <span class="day-title">@dayGroup.Date.ToString("dddd")</span>
+            <span class="day-date">@dayGroup.Date.ToString("dd MMMM yyyy")</span>
+            <div class="day-line"></div>
+            <span class="day-badge db-today">@dayGroup.Matches.Count Matches</span>
+        </div>
+
+        <!-- O GÜNÜN MAÇLARI İÇİN İÇ DÖNGÜ -->
+        @foreach (var match in dayGroup.Matches)
+        {
+            <div class="fx-card">
+                <div class="fx-inner">
+                    <div class="fx-time-col">
+                        <div class="fx-time">@match.MatchDate.ToString("HH:mm")</div>
+                    </div>
+                    <div class="fx-divider"></div>
+                    <div class="fx-teams">
+
+                        <!-- EV SAHİBİ -->
+                        <div class="fx-team-home">
+                            <span class="fx-name home">@match.HomeTeamName</span>
+                            <div class="fx-logo">
+                                <img src="@match.HomeTeamLogo" alt="@match.HomeTeamName" onerror="this.parentNode.textContent='@match.HomeTeamName'" />
+                            </div>
+                        </div>
+
+                        <div class="vs-block"><span class="vs-text">VS</span></div>
+
+                        <!-- DEPLASMAN -->
+                        <div class="fx-team-away">
+                            <div class="fx-logo">
+                                <img src="@match.AwayTeamLogo" alt="@match.AwayTeamName" onerror="this.parentNode.textContent='@match.AwayTeamName'" />
+                            </div>
+                            <span class="fx-name">@match.AwayTeamName</span>
+                        </div>
+
+                    </div>
+
+                    <div class="fx-right">
+                        <span class="fx-stadium"><i class="bi bi-geo-alt" style="font-size:10px;margin-right:3px"></i>@match.Stadium</span>
+                        <button class="notify-btn" onclick="toggleNotify(this)">
+                            <i class="bi bi-bell"></i> <span>Notify</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+}

@@ -1,0 +1,42 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="tr">
+    @await Component.InvokeAsync("_DefaultHeadComponentPartial")
+ 
+
+<body>
+
+    <!-- NAVBAR -->
+  
+    @await Component.InvokeAsync("_DefaultNavbarComponentPartial")
+
+    <!-- LEAGUE HEADER -->
+    @await Component.InvokeAsync("_DefaultLeagueHeaderComponentPartial")
+
+    <!-- MAIN -->
+    <main>
+        <div class="wrap" style="padding-top:28px;padding-bottom:56px">
+            <!-- FEATURED -->
+            @await Component.InvokeAsync("_DefaultFeaturedComponentPartial")
+            <!-- ════ LIVE ════ -->
+            @await Component.InvokeAsync("_DefaultLiveComponentPartial")
+            <!-- ════ FINISHED ════ -->
+            @await Component.InvokeAsync("_DefaultFinishedComponentPartial")
+            <!-- ════ UPCOMING ════ -->
+            @await Component.InvokeAsync("_DefaultUpcomingComponentPartial")
+       
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    @await Component.InvokeAsync("_DefaultFooterComponentPartial")
+
+    @await Component.InvokeAsync("_DefaultScriptComponentPartial")
+</body>
+</html>
+

@@ -1,0 +1,11 @@
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DtoLayer\bin\Debug\net8.0\PremierLeague.DtoLayer.deps.json
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DtoLayer\bin\Debug\net8.0\PremierLeague.DtoLayer.dll
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DtoLayer\bin\Debug\net8.0\PremierLeague.DtoLayer.pdb
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DtoLayer\obj\Debug\net8.0\PremierLeague.DtoLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DtoLayer\obj\Debug\net8.0\PremierLeague.DtoLayer.AssemblyInfoInputs.cache
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DtoLayer\obj\Debug\net8.0\PremierLeague.DtoLayer.AssemblyInfo.cs
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DtoLayer\obj\Debug\net8.0\PremierLeague.DtoLayer.csproj.CoreCompileInputs.cache
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DtoLayer\obj\Debug\net8.0\PremierLeague.DtoLayer.dll
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DtoLayer\obj\Debug\net8.0\refint\PremierLeague.DtoLayer.dll
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DtoLayer\obj\Debug\net8.0\PremierLeague.DtoLayer.pdb
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DtoLayer\obj\Debug\net8.0\ref\PremierLeague.DtoLayer.dll

@@ -1,0 +1,157 @@
+﻿@model GetWeekByIdDto
+@{
+    ViewData["Title"] = "UpdateWeek";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<style>
+    .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .card-header {
+        padding: 20px 24px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .card-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin: 0;
+    }
+
+    .card-body {
+        padding: 30px 24px;
+    }
+
+    .form-group {
+        margin-bottom: 24px;
+    }
+
+    .form-label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-secondary);
+        margin-bottom: 8px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .form-control, .form-select {
+        width: 100%;
+        padding: 12px 16px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text-primary);
+        font-size: 14px;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(41, 121, 255, 0.15);
+            background: rgba(255,255,255,0.05);
+        }
+
+    select option {
+        background: var(--surface);
+        color: var(--text-primary);
+    }
+
+    .btn-container {
+        padding: 24px;
+        border-top: 1px solid var(--border);
+        background: rgba(255,255,255,0.01);
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+    }
+
+    .btn-submit {
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        padding: 10px 24px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+
+        .btn-submit:hover {
+            background: var(--accent-hover);
+        }
+
+    .btn-cancel {
+        background: transparent;
+        color: var(--text-secondary);
+        border: 1px solid var(--border);
+        padding: 10px 24px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: 0.2s;
+    }
+
+        .btn-cancel:hover {
+            background: rgba(255,255,255,0.05);
+            color: var(--text-primary);
+        }
+</style>
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Update Matchweek</h3>
+    </div>
+
+    <form method="post" action="/Week/UpdateWeek">
+
+        <input type="hidden" asp-for="Id" />
+
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="form-label">Season</label>
+                    <select asp-for="SeasonId" asp-items="ViewBag.v_seasons" class="form-select" required>
+                        <option value="">-- Choose Season --</option>
+                    </select>
+                </div>
+
+                <div class="col-md-6 form-group">
+                    <label class="form-label">Week Number</label>
+                    <input type="number" asp-for="WeekNumber" class="form-control" placeholder="e.g. 34" min="1" max="50" required />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 form-group">
+                    <label class="form-label">Start Date</label>
+                    <input type="date" asp-for="StartDate" asp-format="{0:yyyy-MM-dd}" class="form-control" required />
+                </div>
+
+                <div class="col-md-6 form-group">
+                    <label class="form-label">End Date</label>
+                    <input type="date" asp-for="EndDate" asp-format="{0:yyyy-MM-dd}" class="form-control" required />
+                </div>
+            </div>
+
+        </div>
+
+        <div class="btn-container">
+            <a href="/Week/WeekList" class="btn-cancel">Cancel</a>
+            <button type="submit" class="btn-submit">Update Matchweek</button>
+        </div>
+    </form>
+</div>

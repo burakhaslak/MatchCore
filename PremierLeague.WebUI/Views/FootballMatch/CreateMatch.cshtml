@@ -1,0 +1,160 @@
+﻿@model CreateFootballMatchDto
+@{
+    ViewData["Title"] = "CreateMatch";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<style>
+    .form-group {
+        margin-bottom: 18px;
+    }
+
+    .form-label {
+        display: block;
+        font-size: 13px;
+        font-weight: 500;
+        color: var(--text-primary);
+        margin-bottom: 8px;
+    }
+
+    .form-control, .form-select {
+        width: 100%;
+        padding: 11px 14px;
+        border: 1px solid var(--border);
+        border-radius: 7px;
+        font-family: 'DM Sans', sans-serif;
+        font-size: 14px;
+        color: var(--text-primary);
+        background: var(--surface);
+        transition: all 0.2s ease;
+    }
+
+        .form-control:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-light);
+        }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .checkbox-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 30px; /* Align with other inputs in the row */
+    }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--accent);
+        }
+
+    .form-actions {
+        margin-top: 24px;
+        padding-top: 16px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+    }
+</style>
+
+<div class="card" style="max-width: 800px; margin: 0 auto;">
+    <div class="card-header">
+        <div class="card-title">Add New Fixture / Match</div>
+    </div>
+
+    <div class="content" style="padding: 24px;">
+        <form method="post" asp-controller="FootballMatch" asp-action="CreateMatch">
+
+            <!-- 1. Satır: Takımlar -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Home Team</label>
+                    <select asp-for="HomeTeamId" class="form-select" asp-items="ViewBag.v_teams" required>
+                        <option value="">-- Select Home Team --</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Away Team</label>
+                    <select asp-for="AwayTeamId" class="form-select" asp-items="ViewBag.v_teams" required>
+                        <option value="">-- Select Away Team --</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 2. Satır: Tarih ve Hafta -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Match Week</label>
+                    <select asp-for="WeekId" class="form-select" asp-items="ViewBag.v_weeks" required>
+                        <option value="">-- Select Week --</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Date & Time</label>
+                    <input type="datetime-local" asp-for="MatchDate" class="form-control" required />
+                </div>
+            </div>
+
+            <!-- 3. Satır: Stadyum ve Durum -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Stadium</label>
+                    <input type="text" asp-for="Stadium" class="form-control" placeholder="e.g. Emirates Stadium" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Status (CRITICAL)</label>
+                    <select asp-for="Status" class="form-select">
+                        <!-- SQL Prosedürlerimiz ile birebir eşleşen değerler -->
+                        <option value="Not Played">Upcoming (Not Started)</option>
+
+                        <option value="In Progress">Live (In Progress)</option>
+
+                        <option value="Completed">Finished (Completed)</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- 4. Satır: Hakem ve Seyirci -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Referee</label>
+                    <input type="text" asp-for="Referee" class="form-control" placeholder="e.g. Michael Oliver" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Attendance</label>
+                    <input type="number" asp-for="Attendance" class="form-control" placeholder="e.g. 60000" />
+                </div>
+            </div>
+
+            <!-- 5. Satır: İlk Yarı Skoru ve Öne Çıkan Maç Toggle'ı -->
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">First Half Score</label>
+                    <input type="text" asp-for="FirstHalfScore" class="form-control" placeholder="e.g. 1-0 (Optional)" />
+                </div>
+
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" asp-for="IsFeatured" id="IsFeatured" />
+                    <label class="form-label" for="IsFeatured" style="margin-bottom: 0; cursor: pointer;">Mark as Featured Match</label>
+                </div>
+            </div>
+
+            <!-- Butonlar -->
+            <div class="form-actions">
+                <a href="/AdminFootballMatch/Index" class="btn btn-ghost" style="text-decoration: none;">Cancel</a>
+                <button type="submit" class="btn btn-primary">Save Match</button>
+            </div>
+        </form>
+    </div>
+</div>

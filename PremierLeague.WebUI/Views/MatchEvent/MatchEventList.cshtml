@@ -1,0 +1,294 @@
+﻿@model List<ResultMatchEventDto>
+@{
+    ViewData["Title"] = "MatchEventList";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    var groupedEvents = Model.GroupBy(m => m.FootballMatchId).OrderByDescending(g => g.Key).ToList();
+}
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<style>
+    .card {
+        background: var(--surface);
+        border: 1px solid #e0e0e0;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    }
+
+    .card-header {
+        padding: 20px 24px;
+        border-bottom: 1px solid #e0e0e0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fff;
+    }
+
+    .card-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: #333;
+        margin: 0;
+    }
+
+    .btn-primary {
+        background: #00529f;
+        color: #fff;
+        padding: 8px 16px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 600;
+        transition: background 0.2s;
+        border: none;
+    }
+
+        .btn-primary:hover {
+            background: #004080;
+            color: #fff;
+        }
+
+    .table-wrap {
+        overflow-x: auto;
+        background: #fff;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0;
+        font-size: 13px;
+    }
+
+        .table th {
+            background: #f8f9fa;
+            padding: 14px 24px;
+            text-align: left;
+            font-weight: 600;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 11px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .table td {
+            padding: 16px 24px;
+            border-bottom: 1px solid #e0e0e0;
+            color: #333;
+            vertical-align: middle;
+        }
+
+        .table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table tr:hover td {
+            background: #fdfdfd;
+        }
+
+    .badge {
+        padding: 6px 10px;
+        border-radius: 6px;
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    /* GÜNCELLENEN RENKLER - ARTIK GÖRÜNMEZ DEĞİLLER! */
+    .bg-home {
+        background: #00529f;
+        color: #fff;
+    }
+    /* Ev sahibi için Lacivert */
+    .bg-away {
+        background: #6c757d;
+        color: #fff;
+    }
+    /* Deplasman için Koyu Gri */
+
+    .bg-goal {
+        background: #d4edda;
+        color: #28a745;
+        border: 1px solid #c3e6cb;
+    }
+
+    .bg-yellow {
+        background: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffeeba;
+    }
+
+    .bg-red {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+    .bg-sub {
+        background: #cce5ff;
+        color: #004085;
+        border: 1px solid #b8daff;
+    }
+
+    .action-links a {
+        text-decoration: none;
+        font-weight: 600;
+        margin-right: 12px;
+        font-size: 12px;
+    }
+
+    .btn-edit {
+        color: #00529f;
+    }
+
+    .btn-delete {
+        color: #dc3545;
+    }
+
+    .action-links a:hover {
+        text-decoration: underline;
+    }
+
+    .accordion-button {
+        background-color: #f8f9fa !important;
+        font-weight: bold;
+        color: #333 !important;
+    }
+
+        .accordion-button:not(.collapsed) {
+            background-color: #e9ecef !important;
+            color: #00529f !important;
+            box-shadow: none;
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: rgba(0,0,0,0.1);
+        }
+</style>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h3 class="card-title">Match Events</h3>
+        <a href="/MatchEvent/CreateMatchEvent" class="btn btn-primary">+ Add New Event</a>
+    </div>
+
+    <div class="card-body p-3" style="background-color: #f4f6f9;">
+        <!-- AKORDİYON BAŞLANGICI -->
+        <div class="accordion" id="eventsAccordion">
+
+            @foreach (var group in groupedEvents)
+            {
+                int matchId = group.Key;
+                bool isFirst = group == groupedEvents.First();
+                string showClass = isFirst ? "show" : "";
+                string collapsedClass = isFirst ? "" : "collapsed";
+
+                <div class="accordion-item mb-3" style="border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; background: #fff;">
+                    <h2 class="accordion-header" id="heading-@matchId">
+                        <button class="accordion-button @collapsedClass" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-@matchId" aria-expanded="true" aria-controls="collapse-@matchId">
+
+                            <!-- 1. DÜZELTME: AKORDİYON BAŞLIĞINA TAKIM İSİMLERİ GELDİ -->
+                            <i class="bi bi-controller me-2"></i>
+                            @group.First().FootballMatchHomeTeamName <span class="mx-2 text-muted" style="font-size: 11px;">VS</span> @group.First().FootballMatchAwayTeamName
+
+                            <span class="badge bg-secondary ms-auto me-3">@group.Count() Events</span>
+                        </button>
+                    </h2>
+
+                    <div id="collapse-@matchId" class="accordion-collapse collapse @showClass" aria-labelledby="heading-@matchId" data-bs-parent="#eventsAccordion">
+                        <div class="accordion-body p-0">
+
+                            <!-- TABLO BAŞLANGICI -->
+                            <div class="table-wrap">
+                                <table class="table m-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Min</th>
+                                            <th>Team</th>
+                                            <th>Event Type</th>
+                                            <th>Player(s) Involved</th>
+                                            <th>Description</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in group.OrderBy(x => x.Minute))
+                                        {
+                                            <tr>
+                                                <td><strong>@item.Minute'</strong></td>
+                                                <td>
+                                                    <!-- 2. DÜZELTME: HOME/AWAY YERİNE TAKIM İSİMLERİ YAZIYOR -->
+                                                    @if (item.IsHomeTeam)
+                                                    {
+                                                        <span class="badge bg-home">@item.FootballMatchHomeTeamName</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge bg-away">@item.FootballMatchAwayTeamName</span>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    @if (item.ActionType == "Goal")
+                                                    {
+                                                        <span class="badge bg-goal">⚽ Goal</span>
+                                                    }
+                                                    else if (item.ActionType == "YellowCard")
+                                                    {
+
+                                                        <span class="badge bg-yellow">🟨 Yellow Card</span>
+                                                    }
+                                                    else if (item.ActionType == "RedCard")
+                                                    {
+
+                                                        <span class="badge bg-red">🟥 Red Card</span>
+                                                    }
+                                                    else if (item.ActionType == "Substitution")
+                                                    {
+
+                                                        <span class="badge bg-sub">⇄ Sub</span>
+                                                    }
+                                                    else
+                                                    {
+
+                                                        <span class="badge bg-secondary">@item.ActionType</span>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    @if (item.ActionType == "Substitution")
+                                                    {
+                                                        <span><span class="text-success fw-bold">↑ @item.PlayerIn</span> <br /> <span class="text-danger fw-bold">↓ @item.PlayerOut</span></span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <strong>@item.PlayerName</strong>
+                                                    }
+                                                </td>
+                                                <td class="text-muted" style="max-width: 250px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                                                    @(string.IsNullOrEmpty(item.Description) ? "-" : item.Description)
+                                                </td>
+                                                <td class="action-links">
+                                                    <a href="/MatchEvent/UpdateMatchEvent/@item.Id" class="btn-edit">Edit</a>
+                                                    <a href="/MatchEvent/DeleteMatchEvent/@item.Id" class="btn-delete" onclick="return confirm('Emin misin?');">Delete</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- TABLO BİTİŞİ -->
+
+                        </div>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <!-- AKORDİYON BİTİŞİ -->
+    </div>
+</div>
+

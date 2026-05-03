@@ -1,0 +1,92 @@
+﻿@model List<PremierLeague.DtoLayer.StandingDto.TeamStandingDto>
+
+<div style="overflow-x:auto;border-radius:var(--r3);border:1px solid var(--border)">
+    <table class="std-table" style="min-width:620px">
+        <thead>
+            <tr>
+                <th style="width:4px;padding:0"></th>
+                <th style="width:44px">#</th>
+                <th class="team-col">Club</th>
+                <th>P</th>
+                <th>W</th>
+                <th>D</th>
+                <th>L</th>
+                <th class="hide-sm">GF</th>
+                <th class="hide-sm">GA</th>
+                <th>GD</th>
+                <th>Form</th>
+                <th>Pts</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+            @foreach (var team in Model)
+            {
+                // 1. Ayraçları (Bölüm Başlıkları) Belirleme
+                if (team.Rank == 1)
+                {
+                    <tr><td colspan="12"><div class="zone-lbl">🏆 &nbsp;Şampiyonlar Ligi Grupları (1–4)</div></td></tr>
+                }
+                else if (team.Rank == 5)
+                {
+                    <tr><td colspan="12"><div class="zone-lbl">🔵 &nbsp;UEFA Avrupa Ligi (5–6)</div></td></tr>
+                }
+                else if (team.Rank == 7)
+                {
+                    <tr><td colspan="12"><div class="zone-lbl">— &nbsp;Avrupa Dışı (7–17)</div></td></tr>
+                }
+                else if (team.Rank == 18)
+                {
+                    <tr><td colspan="12"><div class="zone-lbl">🔴 &nbsp;Küme Düşme Hattı (18–20)</div></td></tr>
+                }
+
+                // 2. Renk ve Class Belirlemeleri
+                string zClass = "cl-none";
+                string posClass = "";
+                bool isPtsTop = false;
+
+                if (team.Rank == 1) { zClass = "cl-champ"; posClass = "top1"; isPtsTop = true; }
+                else if (team.Rank >= 2 && team.Rank <= 4) { zClass = "cl-ucl"; posClass = "top4"; }
+                else if (team.Rank == 5 || team.Rank == 6) { zClass = "cl-uel"; posClass = "euro"; }
+                else if (team.Rank >= 18) { zClass = "cl-rel"; posClass = "rel"; }
+
+                string gdClass = team.GoalDifference > 0 ? "pos" : (team.GoalDifference < 0 ? "neg" : "zero");
+                string gdStr = team.GoalDifference > 0 ? "+" + team.GoalDifference : team.GoalDifference.ToString();
+
+                <tr class="std-row" title="@team.TeamName">
+                    <td style="padding:0;width:4px">
+                        <div class="pos-strip @zClass" style="height:44px;border-radius:var(--r1) 0 0 var(--r1)"></div>
+                    </td>
+                    <td><span class="pos-num @posClass">@team.Rank</span></td>
+                    <td>
+                        <div class="team-cell">
+                            <div class="t-logo">
+                                <img src="@team.LogoUrl" alt="@team.TeamName" onerror="this.parentNode.textContent='@team.TeamName'" />
+                            </div>
+                            <div class="t-name">
+                                <span class="t-full">@team.TeamName</span>
+                                <span class="t-short">@(team.TeamName.Length >= 3 ? team.TeamName.Substring(0, 3).ToUpper() : team.TeamName)</span>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="s-mp">@team.Played</td>
+                    <td class="s-w">@team.Won</td>
+                    <td class="s-d">@team.Drawn</td>
+                    <td class="s-l">@team.Lost</td>
+                    <td class="s-gf hide-sm">@team.GoalsFor</td>
+                    <td class="s-ga hide-sm">@team.GoalsAgainst</td>
+                    <td class="s-gd @gdClass">@gdStr</td>
+                    <td>
+                        <div class="form-row">
+                            @foreach (var f in team.Form)
+                            {
+                                string fClass = f == "W" ? "fp-w" : (f == "D" ? "fp-d" : "fp-l");
+                                <div class="fp @fClass">@f</div>
+                            }
+                        </div>
+                    </td>
+                    <td class="s-pts @(isPtsTop ? "pts-top" : "")">@team.Points</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

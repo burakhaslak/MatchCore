@@ -1,0 +1,39 @@
+﻿
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="tr">
+
+
+@await Component.InvokeAsync("_FixtureHeadComponentPartial")
+
+
+<body>
+
+    <!-- NAVBAR -->
+    @await Component.InvokeAsync("_FixtureNavbarComponentPartial")
+    <!-- PAGE HEADER -->
+    @await Component.InvokeAsync("_FixtureHeaderComponentPartial")
+  
+    <!-- MAIN -->
+    <main>
+        <div class="wrap">
+            <div class="content">
+
+                <!-- WEEK SUMMARY -->
+                @await Component.InvokeAsync("_FixtureStatisticComponentPartial")
+
+                <!-- ═══════════════ FRIDAY ═══════════════ -->
+                @await Component.InvokeAsync("_FixtureDaysSummaryComponentPartial")
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    @await Component.InvokeAsync("_FixtureFooterComponentPartial")
+    @await Component.InvokeAsync("_FixtureScriptComponentPartial")
+</body>
+</html>

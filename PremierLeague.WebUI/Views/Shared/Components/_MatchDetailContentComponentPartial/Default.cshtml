@@ -1,0 +1,257 @@
+﻿@using PremierLeague.EntityLayer.Entities
+@model PremierLeague.WebUI.Models.MatchContentViewModel
+
+
+
+@{
+    // Artık sayfaya EntityLayer'ı tanıttığımız için uzun uzun yazmamıza gerek yok
+    var stats = Model?.Statistics ?? new MatchStatistic();
+    var events = Model?.Events ?? new List<MatchEvent>();
+
+    // Helper Metot
+    int CalcWidth(int val1, int val2, bool isHome)
+    {
+        int total = val1 + val2;
+        if (total == 0) return 50;
+        return isHome ? (int)Math.Round((double)val1 * 100 / total) : (int)Math.Round((double)val2 * 100 / total);
+    }
+
+    bool htPrinted = false; 
+}
+
+<div class="content">
+	<div class="wrap">
+		<a href="/Match/Index" class="back-btn"><i class="bi bi-arrow-left"></i> Back to Matches</a>
+
+		<div class="row g-4">
+			<!-- SOL KOLON: TIMELINE, GOLLER, KARTLAR, DEĞİŞİKLİKLER -->
+			<div class="col-lg-7">
+
+				<!-- 1. MATCH TIMELINE -->
+				<div class="dc">
+					<div class="dc-title"><i class="bi bi-activity me-2" style="color:var(--green)"></i>Match Timeline</div>
+					<div class="tl-wrap">
+						<div class="tl-line"></div>
+
+						@foreach (var ev in events)
+						{
+							// 45. dakikayı geçtiysek ve henüz HT yazdırmadıysak araya HT (Devre Arası) etiketi atalım
+							if (!htPrinted && ev.Minute > 45)
+							{
+								<div class="tl-ev">
+									<div class="tl-home"></div>
+									<div class="tl-min-c">
+										<div class="min-b" style="background:rgba(255,193,7,.09);border-color:rgba(255,193,7,.22);color:var(--yellow)">HT</div>
+									</div>
+									<div class="tl-away"></div>
+								</div>
+								htPrinted = true;
+							}
+
+							// Event türüne göre CSS sınıflarını ve ikonları ayarlıyoruz
+							string evClass = ev.ActionType == "Goal" ? "goal-ev" : (ev.ActionType == "Yellow Card" ? "yel-ev" : (ev.ActionType == "Red Card" ? "red-ev" : "sub-ev"));
+							string iconClass = ev.ActionType == "Goal" ? "ei-goal" : (ev.ActionType == "Yellow Card" ? "ei-yel" : (ev.ActionType == "Red Card" ? "ei-red" : "ei-sub"));
+							string iconHtml = ev.ActionType == "Substitution" ? "<i class=\"bi bi-arrow-left-right\"></i>" : (ev.ActionType == "Goal" ? "<i class=\"bi bi-circle-fill\" style=\"font-size:9px\"></i>" : "<i class=\"bi bi-square-fill\" style=\"font-size:10px\"></i>");
+
+							<div class="tl-ev">
+								<div class="tl-home">
+									@if (ev.IsHomeTeam)
+									{
+										<div class="chip home @evClass">
+											<div class="ev-ico @iconClass">@Html.Raw(iconHtml)</div>
+											<div>
+												<div class="ev-pl">@(ev.ActionType == "Substitution" ? $"{ev.PlayerIn} ↑" : ev.PlayerName)</div>
+												<div class="ev-dt">@(ev.ActionType == "Substitution" ? $"{ev.PlayerOut} ↓" : ev.ActionType)</div>
+											</div>
+										</div>
+									}
+								</div>
+								<div class="tl-min-c"><div class="min-b">@ev.Minute'</div></div>
+								<div class="tl-away">
+									@if (!ev.IsHomeTeam)
+									{
+										<div class="chip away @evClass">
+											<div class="ev-ico @iconClass">@Html.Raw(iconHtml)</div>
+											<div>
+												<div class="ev-pl">@(ev.ActionType == "Substitution" ? $"{ev.PlayerIn} ↑" : ev.PlayerName)</div>
+												<div class="ev-dt">@(ev.ActionType == "Substitution" ? $"{ev.PlayerOut} ↓" : ev.ActionType)</div>
+											</div>
+										</div>
+									}
+								</div>
+							</div>
+						}
+
+						<div class="tl-ev">
+							<div class="tl-home"></div>
+							<div class="tl-min-c">
+								<div class="min-b" style="background:rgba(143,163,200,.08);border-color:rgba(143,163,200,.18);color:var(--t2)">FT</div>
+							</div>
+							<div class="tl-away"></div>
+						</div>
+					</div>
+				</div>
+
+				<!-- 2. GOALS SUMMARY -->
+				<div class="dc">
+					<div class="dc-title"><i class="bi bi-circle-fill me-2" style="color:var(--green);font-size:9px"></i>Goals</div>
+					<div class="split2">
+						<div class="box2">
+							<div class="box2-title">⚽ @Model.HomeTeamName</div>
+							@foreach (var g in events.Where(e => e.IsHomeTeam && e.ActionType == "Goal"))
+							{
+								<div class="gl"><div class="gl-ico">⚽</div><div class="gl-pl">@g.PlayerName</div><div class="gl-min">@g.Minute'</div></div>
+							}
+						</div>
+						<div class="box2">
+							<div class="box2-title">⚽ @Model.AwayTeamName</div>
+							@foreach (var g in events.Where(e => !e.IsHomeTeam && e.ActionType == "Goal"))
+							{
+								<div class="gl"><div class="gl-ico">⚽</div><div class="gl-pl">@g.PlayerName</div><div class="gl-min">@g.Minute'</div></div>
+							}
+						</div>
+					</div>
+				</div>
+
+				<!-- 3. CARDS SUMMARY -->
+				<div class="dc">
+					<div class="dc-title"><i class="bi bi-square-fill me-2" style="color:var(--yellow);font-size:10px"></i>Cards</div>
+					<div class="split2">
+						<div class="box2">
+							<div class="box2-title">@Model.HomeTeamName</div>
+							@foreach (var c in events.Where(e => e.IsHomeTeam && (e.ActionType == "Yellow Card" || e.ActionType == "Red Card")))
+							{
+								<div class="gl"><div class="@(c.ActionType == "Yellow Card" ? "ycard" : "rcard")"></div><div class="gl-pl">@c.PlayerName</div><div class="gl-min">@c.Minute'</div></div>
+							}
+						</div>
+						<div class="box2">
+							<div class="box2-title">@Model.AwayTeamName</div>
+							@foreach (var c in events.Where(e => !e.IsHomeTeam && (e.ActionType == "Yellow Card" || e.ActionType == "Red Card")))
+							{
+								<div class="gl"><div class="@(c.ActionType == "Yellow Card" ? "ycard" : "rcard")"></div><div class="gl-pl">@c.PlayerName</div><div class="gl-min">@c.Minute'</div></div>
+							}
+						</div>
+					</div>
+				</div>
+
+				<!-- 4. SUBSTITUTIONS -->
+				<div class="dc">
+					<div class="dc-title"><i class="bi bi-arrow-left-right me-2" style="color:var(--blue)"></i>Substitutions</div>
+
+					<div class="sub-lbl">@Model.HomeTeamName</div>
+					@foreach (var s in events.Where(e => e.IsHomeTeam && e.ActionType == "Substitution"))
+					{
+						<div class="sub-r">
+							<div class="sub-min">@s.Minute'</div>
+							<div class="sub-in">↑ @s.PlayerIn</div><div class="sub-arr">⇄</div><div class="sub-out">↓ @s.PlayerOut</div>
+						</div>
+					}
+
+					<div class="sub-lbl" style="margin-top:15px">@Model.AwayTeamName</div>
+					@foreach (var s in events.Where(e => !e.IsHomeTeam && e.ActionType == "Substitution"))
+					{
+						<div class="sub-r">
+							<div class="sub-min">@s.Minute'</div>
+							<div class="sub-in">↑ @s.PlayerIn</div><div class="sub-arr">⇄</div><div class="sub-out">↓ @s.PlayerOut</div>
+						</div>
+					}
+				</div>
+
+			</div>
+
+			<!-- SAĞ KOLON: İSTATİSTİKLER VE MAÇ BİLGİSİ -->
+			<div class="col-lg-5">
+
+				<!-- SCORE SUMMARY -->
+				<div class="dc">
+					<div class="dc-title"><i class="bi bi-bar-chart-fill me-2" style="color:var(--blue)"></i>Score Summary</div>
+					<div class="sc-pills">
+						<div class="sc-pill"><div class="sp-lbl">First Half</div><div class="sp-val">@stats.HomeGoalsFirstHalf–@stats.AwayGoalsFirstHalf</div></div>
+						<div class="sc-pill"><div class="sp-lbl">Second Half</div><div class="sp-val">@stats.HomeGoalsSecondHalf–@stats.AwayGoalsSecondHalf</div></div>
+						<div class="sc-pill"><div class="sp-lbl">Full Time</div><div class="sp-val" style="color:var(--green)">@(stats.HomeGoalsFirstHalf + stats.HomeGoalsSecondHalf)–@(stats.AwayGoalsFirstHalf + stats.AwayGoalsSecondHalf)</div></div>
+					</div>
+				</div>
+
+				<!-- STATISTICS BARS -->
+				<div class="dc">
+					<div class="dc-title"><i class="bi bi-graph-up me-2" style="color:var(--green)"></i>Statistics</div>
+
+					<!-- Possession -->
+					<div class="stat-r"><div class="sv-h">@stats.HomePossession%</div><div class="sl">Possession</div><div class="sv-a">@stats.AwayPossession%</div></div>
+					<div class="bar-r"><div class="bh"><div class="f" style="width:@stats.HomePossession%"></div></div><div></div><div class="ba"><div class="f" style="width:@stats.AwayPossession%"></div></div></div>
+
+					<!-- Shots -->
+					<div class="stat-r"><div class="sv-h">@stats.HomeShots</div><div class="sl">Shots</div><div class="sv-a">@stats.AwayShots</div></div>
+					<div class="bar-r"><div class="bh"><div class="f" style="width:@CalcWidth(stats.HomeShots, stats.AwayShots, true)%"></div></div><div></div><div class="ba"><div class="f" style="width:@CalcWidth(stats.HomeShots, stats.AwayShots, false)%"></div></div></div>
+
+					<!-- Shots on Target -->
+					<div class="stat-r"><div class="sv-h">@stats.HomeShotsOnTarget</div><div class="sl">Shots on Target</div><div class="sv-a">@stats.AwayShotsOnTarget</div></div>
+					<div class="bar-r"><div class="bh"><div class="f" style="width:@CalcWidth(stats.HomeShotsOnTarget, stats.AwayShotsOnTarget, true)%"></div></div><div></div><div class="ba"><div class="f" style="width:@CalcWidth(stats.HomeShotsOnTarget, stats.AwayShotsOnTarget, false)%"></div></div></div>
+
+					<!-- Passes -->
+					<div class="stat-r"><div class="sv-h">@stats.HomePasses</div><div class="sl">Passes</div><div class="sv-a">@stats.AwayPasses</div></div>
+					<div class="bar-r"><div class="bh"><div class="f" style="width:@CalcWidth(stats.HomePasses, stats.AwayPasses, true)%"></div></div><div></div><div class="ba"><div class="f" style="width:@CalcWidth(stats.HomePasses, stats.AwayPasses, false)%"></div></div></div>
+
+					<!-- Pass Accuracy (Yüzdeler direkt yazılır) -->
+					<div class="stat-r"><div class="sv-h">@stats.HomePassAccuracy%</div><div class="sl">Pass Accuracy</div><div class="sv-a">@stats.AwayPassAccuracy%</div></div>
+					<div class="bar-r"><div class="bh"><div class="f" style="width:@stats.HomePassAccuracy%"></div></div><div></div><div class="ba"><div class="f" style="width:@stats.AwayPassAccuracy%"></div></div></div>
+
+					<!-- Corners -->
+					<div class="stat-r"><div class="sv-h">@stats.HomeCorners</div><div class="sl">Corners</div><div class="sv-a">@stats.AwayCorners</div></div>
+					<div class="bar-r"><div class="bh"><div class="f" style="width:@CalcWidth(stats.HomeCorners, stats.AwayCorners, true)%"></div></div><div></div><div class="ba"><div class="f" style="width:@CalcWidth(stats.HomeCorners, stats.AwayCorners, false)%"></div></div></div>
+
+					<!-- Fouls -->
+					<div class="stat-r"><div class="sv-h">@stats.HomeFouls</div><div class="sl">Fouls</div><div class="sv-a">@stats.AwayFouls</div></div>
+					<div class="bar-r"><div class="bh"><div class="f" style="width:@CalcWidth(stats.HomeFouls, stats.AwayFouls, true)%"></div></div><div></div><div class="ba"><div class="f" style="width:@CalcWidth(stats.HomeFouls, stats.AwayFouls, false)%"></div></div></div>
+
+					<!-- Offsides -->
+					<div class="stat-r"><div class="sv-h">@stats.HomeOffsides</div><div class="sl">Offsides</div><div class="sv-a">@stats.AwayOffsides</div></div>
+					<div class="bar-r" style="margin-bottom:14px"><div class="bh"><div class="f" style="width:@CalcWidth(stats.HomeOffsides, stats.AwayOffsides, true)%"></div></div><div></div><div class="ba"><div class="f" style="width:@CalcWidth(stats.HomeOffsides, stats.AwayOffsides, false)%"></div></div></div>
+
+					<!-- Cards (Bar yok) -->
+					<div class="stat-r" style="margin-bottom:0">
+						<div class="sv-h" style="color:var(--yellow)">@stats.HomeYellowCards</div>
+						<div class="sl">Yellow Cards</div>
+						<div class="sv-a" style="color:var(--yellow)">@stats.AwayYellowCards</div>
+					</div>
+					<div class="stat-r" style="margin-bottom:0;margin-top:8px">
+						<div class="sv-h" style="color:var(--red)">@stats.HomeRedCards</div>
+						<div class="sl">Red Cards</div>
+						<div class="sv-a" style="color:var(--red)">@stats.AwayRedCards</div>
+					</div>
+
+					<!-- Takım İsimleri Lejantı -->
+					<div style="display:flex;justify-content:space-between;margin-top:18px;padding-top:14px;border-top:1px solid var(--border)">
+						<div style="display:flex;align-items:center;gap:7px">
+							<div style="width:9px;height:9px;border-radius:50%;background:var(--blue)"></div>
+							<span style="font-family:var(--fd);font-size:12px;font-weight:700;color:var(--t2)">@Model.HomeTeamName</span>
+						</div>
+						<div style="display:flex;align-items:center;gap:7px">
+							<span style="font-family:var(--fd);font-size:12px;font-weight:700;color:var(--t2)">@Model.AwayTeamName</span>
+							<div style="width:9px;height:9px;border-radius:50%;background:var(--live)"></div>
+						</div>
+					</div>
+				</div>
+
+				<!-- MATCH INFO -->
+				<div class="dc">
+					<div class="dc-title"><i class="bi bi-info-circle me-2" style="color:var(--t3)"></i>Match Info</div>
+					<div class="mi-row"><span class="mi-key">League</span><span class="mi-val" style="color:var(--gold)">Premier League</span></div>
+					<div class="mi-row"><span class="mi-key">Season</span><span class="mi-val">@Model.SeasonName</span></div>
+					<div class="mi-row"><span class="mi-key">Week</span><span class="mi-val">Matchweek @Model.WeekId</span></div>
+					<div class="mi-row"><span class="mi-key">Stadium</span><span class="mi-val">@Model.Stadium</span></div>
+					<div class="mi-row"><span class="mi-key">Location</span><span class="mi-val">@Model.City, England</span></div>
+					<div class="mi-row"><span class="mi-key">Attendance</span><span class="mi-val">@(Model.Attendance?.ToString("N0") ?? "-")</span></div>
+					<div class="mi-row"><span class="mi-key">Referee</span><span class="mi-val">@Model.Referee</span></div>
+					<div class="mi-row"><span class="mi-key">Date</span><span class="mi-val">@Model.MatchDate.ToString("dd MMMM yyyy")</span></div>
+					<div class="mi-row"><span class="mi-key">Kick-off</span><span class="mi-val">@Model.MatchDate.ToString("HH:mm")</span></div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="mt-2">
+			<a href="/Match/Index" class="back-btn"><i class="bi bi-arrow-left"></i> Back to All Matches</a>
+		</div>
+	</div>
+</div>

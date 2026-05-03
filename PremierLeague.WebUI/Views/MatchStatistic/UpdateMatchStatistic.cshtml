@@ -1,0 +1,256 @@
+﻿@model UpdateMatchStatisticDto
+@{
+    ViewData["Title"] = "UpdateMatchStatistic";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<style>
+    .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .card-header {
+        padding: 20px 24px;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .card-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin: 0;
+    }
+
+    .card-body {
+        padding: 30px 24px;
+    }
+
+    .section-title {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--accent);
+        margin-bottom: 20px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid rgba(41, 121, 255, 0.2);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-label {
+        display: block;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--text-secondary);
+        margin-bottom: 8px;
+        text-transform: uppercase;
+    }
+
+    .form-control, .form-select {
+        width: 100%;
+        padding: 10px 14px;
+        background: rgba(255,255,255,0.03);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        color: var(--text-primary);
+        font-size: 14px;
+    }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--accent);
+            outline: none;
+            background: rgba(255,255,255,0.05);
+        }
+
+    .btn-container {
+        padding: 24px;
+        border-top: 1px solid var(--border);
+        background: rgba(255,255,255,0.01);
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+    }
+
+    .btn-submit {
+        background: var(--accent);
+        color: #fff;
+        border: none;
+        padding: 10px 30px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+        .btn-submit:hover {
+            background: var(--accent-hover);
+        }
+
+    .btn-cancel {
+        background: transparent;
+        color: var(--text-secondary);
+        border: 1px solid var(--border);
+        padding: 10px 30px;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        text-decoration: none;
+    }
+</style>
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Update Match Statistics</h3>
+    </div>
+
+    <form method="post" action="/MatchStatistic/UpdateMatchStatistic">
+
+        <input type="hidden" asp-for="Id" />
+
+        <div class="card-body">
+
+            <div class="section-title">Match Selection</div>
+            <div class="row">
+                <div class="col-md-12 form-group">
+                    <label class="form-label">Football Match</label>
+                    <select asp-for="FootballMatchId" asp-items="ViewBag.v_matches" class="form-select" required>
+                        <option value="">-- Choose Match --</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="section-title">Scoring Summary</div>
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label class="form-label">Home: 1st Half Goals</label>
+                    <input type="number" asp-for="HomeGoalsFirstHalf" class="form-control" min="0" required />
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="form-label">Home: 2nd Half Goals</label>
+                    <input type="number" asp-for="HomeGoalsSecondHalf" class="form-control" min="0" required />
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="form-label">Away: 1st Half Goals</label>
+                    <input type="number" asp-for="AwayGoalsFirstHalf" class="form-control" min="0" required />
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="form-label">Away: 2nd Half Goals</label>
+                    <input type="number" asp-for="AwayGoalsSecondHalf" class="form-control" min="0" required />
+                </div>
+            </div>
+
+            <div class="section-title">Intensity & Performance</div>
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label class="form-label">Home Possession (%)</label>
+                    <input type="number" asp-for="HomePossession" class="form-control" min="0" max="100" required />
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="form-label">Away Possession (%)</label>
+                    <input type="number" asp-for="AwayPossession" class="form-control" min="0" max="100" required />
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="form-label">Home Total Shots</label>
+                    <input type="number" asp-for="HomeShots" class="form-control" min="0" required />
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="form-label">Away Total Shots</label>
+                    <input type="number" asp-for="AwayShots" class="form-control" min="0" required />
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="form-label">Home Shots On Target</label>
+                    <input type="number" asp-for="HomeShotsOnTarget" class="form-control" min="0" required />
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="form-label">Away Shots On Target</label>
+                    <input type="number" asp-for="AwayShotsOnTarget" class="form-control" min="0" required />
+                </div>
+            </div>
+
+            <div class="section-title">Distribution</div>
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label class="form-label">Home Total Passes</label>
+                    <input type="number" asp-for="HomePasses" class="form-control" min="0" required />
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="form-label">Away Total Passes</label>
+                    <input type="number" asp-for="AwayPasses" class="form-control" min="0" required />
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="form-label">Home Pass Accuracy (%)</label>
+                    <input type="number" asp-for="HomePassAccuracy" class="form-control" min="0" max="100" required />
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="form-label">Away Pass Accuracy (%)</label>
+                    <input type="number" asp-for="AwayPassAccuracy" class="form-control" min="0" max="100" required />
+                </div>
+            </div>
+
+            <div class="section-title">Discipline & Set Pieces</div>
+            <div class="row">
+                <div class="col-md-2 form-group">
+                    <label class="form-label">H. Corners</label>
+                    <input type="number" asp-for="HomeCorners" class="form-control" min="0" />
+                </div>
+                <div class="col-md-2 form-group">
+                    <label class="form-label">A. Corners</label>
+                    <input type="number" asp-for="AwayCorners" class="form-control" min="0" />
+                </div>
+                <div class="col-md-2 form-group">
+                    <label class="form-label">H. Fouls</label>
+                    <input type="number" asp-for="HomeFouls" class="form-control" min="0" />
+                </div>
+                <div class="col-md-2 form-group">
+                    <label class="form-label">A. Fouls</label>
+                    <input type="number" asp-for="AwayFouls" class="form-control" min="0" />
+                </div>
+                <div class="col-md-2 form-group">
+                    <label class="form-label">H. Offsides</label>
+                    <input type="number" asp-for="HomeOffsides" class="form-control" min="0" />
+                </div>
+                <div class="col-md-2 form-group">
+                    <label class="form-label">A. Offsides</label>
+                    <input type="number" asp-for="AwayOffsides" class="form-control" min="0" />
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    <label class="form-label" style="color: #ffd600;">Home Yellow Cards</label>
+                    <input type="number" asp-for="HomeYellowCards" class="form-control" min="0" />
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="form-label" style="color: #ffd600;">Away Yellow Cards</label>
+                    <input type="number" asp-for="AwayYellowCards" class="form-control" min="0" />
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="form-label" style="color: #ff1744;">Home Red Cards</label>
+                    <input type="number" asp-for="HomeRedCards" class="form-control" min="0" />
+                </div>
+                <div class="col-md-3 form-group">
+                    <label class="form-label" style="color: #ff1744;">Away Red Cards</label>
+                    <input type="number" asp-for="AwayRedCards" class="form-control" min="0" />
+                </div>
+            </div>
+
+        </div>
+
+        <div class="btn-container">
+            <a href="/MatchStatistic/MatchStatisticList" class="btn-cancel">Cancel</a>
+            <button type="submit" class="btn-submit">Update Statistics</button>
+        </div>
+    </form>
+</div>
+

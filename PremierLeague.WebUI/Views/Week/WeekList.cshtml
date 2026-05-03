@@ -1,0 +1,162 @@
+﻿@model List<ResultWeekDto>
+@{
+    ViewData["Title"] = "WeekList";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<style>
+    .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .card-header {
+        padding: 20px 24px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .card-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin: 0;
+    }
+
+    .btn-primary {
+        background: var(--accent);
+        color: #fff;
+        padding: 8px 16px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 600;
+        transition: background 0.2s;
+    }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            color: #fff;
+        }
+
+    .table-wrap {
+        overflow-x: auto;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0;
+        font-size: 14px;
+    }
+
+        .table th {
+            background: rgba(255,255,255,0.02);
+            padding: 14px 24px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 11px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .table td {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-primary);
+            vertical-align: middle;
+        }
+
+        .table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table tr:hover td {
+            background: rgba(255,255,255,0.01);
+        }
+
+    .week-badge {
+        background: rgba(41, 121, 255, 0.15);
+        color: #2979ff;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-weight: 700;
+        font-size: 12px;
+        border: 1px solid rgba(41, 121, 255, 0.3);
+    }
+
+    .action-links a {
+        text-decoration: none;
+        font-weight: 600;
+        margin-right: 14px;
+        font-size: 13px;
+    }
+
+    .btn-edit {
+        color: #2979ff;
+    }
+
+    .btn-delete {
+        color: #ff1744;
+    }
+
+    .action-links a:hover {
+        opacity: 0.8;
+    }
+</style>
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Manage Match Weeks</h3>
+        <a href="/Week/CreateWeek" class="btn-primary">+ Add New Week</a>
+    </div>
+
+    <div class="table-wrap">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Season ID</th>
+                    <th>Week Number</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td><strong>#@item.Id</strong></td>
+                            <td style="color: var(--text-secondary);">Season @item.SeasonId</td>
+                            <td><span class="week-badge">Matchweek @item.WeekNumber</span></td>
+                            <td>@item.StartDate.ToString("dd MMM yyyy")</td>
+                            <td>@item.EndDate.ToString("dd MMM yyyy")</td>
+                            <td class="action-links">
+                                <a href="/Week/UpdateWeek/@item.Id" class="btn-edit">Edit</a>
+                                <a href="/Week/DeleteWeek/@item.Id" class="btn-delete" onclick="return confirm('Are you sure you want to delete this week?');">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="6" style="text-align: center; padding: 30px; color: var(--text-secondary);">
+                            No match weeks found. Click "Add New Week" to create one.
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

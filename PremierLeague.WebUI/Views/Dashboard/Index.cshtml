@@ -1,0 +1,344 @@
+﻿@model PremierLeague.WebUI.Models.DashboardViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+
+<!-- Chart.js Kütüphanesi -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<style>
+    .dash-wrapper {
+        padding: 25px;
+        font-family: 'Segoe UI', Roboto, sans-serif;
+        color: #2b3445;
+        background-color: #f3f5f9;
+        min-height: 100vh;
+    }
+
+    /* Modern Kart Tasarımı */
+    .m-card {
+        background: #fff;
+        border: none;
+        border-radius: 20px;
+        padding: 24px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        transition: transform 0.3s ease;
+        height: 100%;
+    }
+
+        .m-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+        }
+
+    /* İstatistik İkonları */
+    .icon-cube {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+    }
+
+    .ic-blue {
+        background: linear-gradient(135deg, #00529f 0%, #007bff 100%);
+        color: #fff;
+        box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+    }
+
+    .ic-green {
+        background: linear-gradient(135deg, #00b862 0%, #20c997 100%);
+        color: #fff;
+        box-shadow: 0 4px 15px rgba(32, 201, 151, 0.3);
+    }
+
+    .ic-red {
+        background: linear-gradient(135deg, #e30613 0%, #ff4757 100%);
+        color: #fff;
+        box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+    }
+
+    .ic-gold {
+        background: linear-gradient(135deg, #d39e00 0%, #ffc107 100%);
+        color: #fff;
+        box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3);
+    }
+
+    .val-text {
+        font-size: 32px;
+        font-weight: 800;
+        color: #1e293b;
+        margin-top: 15px;
+        margin-bottom: 2px;
+    }
+
+    .lbl-text {
+        font-size: 14px;
+        color: #64748b;
+        font-weight: 600;
+    }
+
+    /* Başlıklar */
+    .card-title-modern {
+        font-size: 16px;
+        font-weight: 700;
+        color: #0f172a;
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    /* Tablo */
+    .modern-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0 10px;
+    }
+
+        .modern-table td {
+            background: #f8fafc;
+            padding: 15px 20px;
+            vertical-align: middle;
+        }
+
+        .modern-table tr td:first-child {
+            border-radius: 12px 0 0 12px;
+        }
+
+        .modern-table tr td:last-child {
+            border-radius: 0 12px 12px 0;
+        }
+
+        .modern-table tr:hover td {
+            background: #f1f5f9;
+        }
+
+    .badge-modern {
+        padding: 6px 12px;
+        border-radius: 8px;
+        font-size: 11px;
+        font-weight: 700;
+    }
+
+    .bm-fin {
+        background: #e2e8f0;
+        color: #475569;
+    }
+
+    .bm-live {
+        background: #fee2e2;
+        color: #ef4444;
+    }
+
+    /* Liderlik Rankı */
+    .rank-circle {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #f1f5f9;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 14px;
+        color: #64748b;
+    }
+
+        .rank-circle.gold {
+            background: #fef08a;
+            color: #ca8a04;
+        }
+</style>
+
+<div class="dash-wrapper">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 style="font-weight: 800; color: #0f172a; margin:0;">Dashboard Analytics</h2>
+            <p style="color: #64748b; margin: 0; font-size: 15px;">A complete overview of league statistics and recent activities.</p>
+        </div>
+    </div>
+
+    <!-- 1. ÜST İSTATİSTİK KARTLARI -->
+    <div class="row g-4 mb-4">
+        <div class="col-xl-3 col-md-6">
+            <div class="m-card">
+                <div class="icon-cube ic-blue"><i class="bi bi-calendar-check"></i></div>
+                <div class="val-text">@Model.TotalMatches</div>
+                <div class="lbl-text">Matches Played</div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="m-card">
+                <div class="icon-cube ic-green"><i class="bi bi-heptagon-fill"></i></div>
+                <div class="val-text">@Model.TotalGoals</div>
+                <div class="lbl-text">Total Goals Scored</div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="m-card">
+                <div class="icon-cube ic-red"><i class="bi bi-file-earmark-fill"></i></div>
+                <div class="val-text">@Model.TotalRedCards</div>
+                <div class="lbl-text">Red Cards Given</div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-md-6">
+            <div class="m-card">
+                <div class="icon-cube ic-gold"><i class="bi bi-shield-shaded"></i></div>
+                <div class="val-text">@Model.ActiveTeams</div>
+                <div class="lbl-text">Active Clubs</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. GRAFİKLER (CHART.JS) -->
+    <div class="row g-4 mb-4">
+        <!-- Gol Grafiği -->
+        <div class="col-xl-8">
+            <div class="m-card">
+                <div class="card-title-modern"><i class="bi bi-bar-chart-fill" style="color:#007bff;"></i> Goals Per Week</div>
+                <div style="height: 300px;">
+                    <canvas id="goalsChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kart Dağılımı Grafiği -->
+        <div class="col-xl-4">
+            <div class="m-card">
+                <div class="card-title-modern"><i class="bi bi-pie-chart-fill" style="color:#ff4757;"></i> Disciplinary Cards</div>
+                <div style="height: 300px; display: flex; justify-content: center;">
+                    <canvas id="cardsChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. TABLOLAR (SON MAÇLAR & LİDERLİK) -->
+    <div class="row g-4">
+        <!-- Son Maçlar -->
+        <div class="col-xl-8">
+            <div class="m-card">
+                <div class="card-title-modern"><i class="bi bi-activity" style="color:#20c997;"></i> Recent Matches</div>
+                <table class="modern-table">
+                    <tbody>
+                        @foreach (var match in Model.RecentMatches)
+                        {
+                            int hScore = match.MatchStatistic != null ? match.MatchStatistic.HomeGoalsFirstHalf + match.MatchStatistic.HomeGoalsSecondHalf : 0;
+                            int aScore = match.MatchStatistic != null ? match.MatchStatistic.AwayGoalsFirstHalf + match.MatchStatistic.AwayGoalsSecondHalf : 0;
+
+                            <tr>
+                                <td>
+                                    <div style="font-weight:700; color:#1e293b; font-size:15px;">@match.HomeTeam.Name - @match.AwayTeam.Name</div>
+                                    <div style="font-size:12px; color:#64748b;">@match.MatchDate.ToString("dd MMM yyyy")</div>
+                                </td>
+                                <td>
+                                    <span style="font-size:18px; font-weight:800; color:#0f172a;">@(match.MatchStatistic != null ? $"{hScore} : {aScore}" : "-")</span>
+                                </td>
+                                <td>
+                                    <span class="badge-modern @(match.Status == "Completed" ? "bm-fin" : "bm-live")">@match.Status.ToUpper()</span>
+                                </td>
+                                <td class="text-end">
+                                    <a href="/Match/Detail/@match.Id" target="_blank" class="btn btn-sm btn-light border" style="border-radius:8px;"><i class="bi bi-eye"></i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Mini Puan Durumu -->
+        <div class="col-xl-4">
+            <div class="m-card">
+                <div class="card-title-modern"><i class="bi bi-trophy-fill" style="color:#ca8a04;"></i> Top 5 Standings</div>
+
+                <div class="mt-3">
+                    @{
+                        int rank = 1;
+                    }
+                    @foreach (var team in Model.Top5Teams)
+                    {
+                        <div class="d-flex align-items-center justify-content-between mb-3 pb-3 border-bottom">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="rank-circle @(rank == 1 ? "gold" : "")">@rank</div>
+                                <span style="font-weight:600; color:#1e293b;">@team.TeamName</span>
+                            </div>
+                            <div style="font-weight:800; color:#0f172a;">@team.Points <span style="font-weight:500; font-size:12px; color:#64748b;">pts</span></div>
+                        </div>
+                        rank++;
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- Grafikleri Çizen JavaScript -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        // C#'tan gelen Verileri JavaScript Dizilerine Çeviriyoruz
+        const weeklyLabels = @Html.Raw(Json.Serialize(Model.WeeklyLabels));
+        const weeklyGoals = @Html.Raw(Json.Serialize(Model.WeeklyGoals));
+
+        const yellowCards = @Model.YellowCardsCount;
+        const redCards = @Model.RedCardsCount;
+
+        // 1. BAR CHART (Haftalık Goller)
+        const ctxGoals = document.getElementById('goalsChart').getContext('2d');
+        new Chart(ctxGoals, {
+            type: 'bar',
+            data: {
+                labels: weeklyLabels,
+                datasets: [{
+                    label: 'Total Goals',
+                    data: weeklyGoals,
+                    backgroundColor: 'rgba(0, 123, 255, 0.7)',
+                    borderColor: 'rgba(0, 123, 255, 1)',
+                    borderWidth: 1,
+                    borderRadius: 6
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, grid: { borderDash: [5, 5], color: '#e2e8f0' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // 2. DOUGHNUT CHART (Kartlar)
+        const ctxCards = document.getElementById('cardsChart').getContext('2d');
+        new Chart(ctxCards, {
+            type: 'doughnut',
+            data: {
+                labels: ['Yellow Cards', 'Red Cards'],
+                datasets: [{
+                    data: [yellowCards, redCards],
+                    backgroundColor: ['#f59e0b', '#ef4444'],
+                    hoverOffset: 4,
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '75%',
+                plugins: {
+                    legend: { position: 'bottom', labels: { usePointStyle: true, padding: 20 } }
+                }
+            }
+        });
+    });
+</script>

@@ -1,0 +1,14 @@
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.EntitiesLayer\bin\Debug\net8.0\PremierLeague.EntityLayer.deps.json
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.EntitiesLayer\bin\Debug\net8.0\PremierLeague.EntityLayer.runtimeconfig.json
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.EntitiesLayer\bin\Debug\net8.0\PremierLeague.EntityLayer.dll
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.EntitiesLayer\bin\Debug\net8.0\PremierLeague.EntityLayer.pdb
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.EntitiesLayer\obj\Debug\net8.0\PremierLeague.EntityLayer.csproj.AssemblyReference.cache
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.EntitiesLayer\obj\Debug\net8.0\PremierLeague.EntityLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.EntitiesLayer\obj\Debug\net8.0\PremierLeague.EntityLayer.AssemblyInfoInputs.cache
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.EntitiesLayer\obj\Debug\net8.0\PremierLeague.EntityLayer.AssemblyInfo.cs
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.EntitiesLayer\obj\Debug\net8.0\PremierLeague.EntityLayer.csproj.CoreCompileInputs.cache
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.EntitiesLayer\obj\Debug\net8.0\PremierLeague.EntityLayer.dll
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.EntitiesLayer\obj\Debug\net8.0\refint\PremierLeague.EntityLayer.dll
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.EntitiesLayer\obj\Debug\net8.0\PremierLeague.EntityLayer.pdb
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.EntitiesLayer\obj\Debug\net8.0\PremierLeague.EntityLayer.genruntimeconfig.cache
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.EntitiesLayer\obj\Debug\net8.0\ref\PremierLeague.EntityLayer.dll

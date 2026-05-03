@@ -1,0 +1,33 @@
+﻿@model PremierLeague.WebUI.Models.TopStatsViewModel
+
+<div class="top-stats">
+
+    <!-- LEAGUE LEADERS -->
+    <div class="ts-card">
+        <div class="ts-label">League Leaders</div>
+        <div class="ts-val" style="color:var(--gold)">@Model.LeaderShortName</div>
+        <div class="ts-team">@Model.LeaderName · @Model.LeaderPoints pts</div>
+    </div>
+
+    <!-- MOST GOALS -->
+    <div class="ts-card">
+        <div class="ts-label">Most Goals</div>
+        <div class="ts-val" style="color:var(--green)">@Model.MostGoalsValue</div>
+        <div class="ts-team">@Model.MostGoalsTeam</div>
+    </div>
+
+    <!-- FEWEST CONCEDED -->
+    <div class="ts-card">
+        <div class="ts-label">Fewest Conceded</div>
+        <div class="ts-val" style="color:var(--blue)">@Model.FewestConcededValue</div>
+        <div class="ts-team">@Model.FewestConcededTeam</div>
+    </div>
+
+    <!-- MATCH OF THE WEEK -->
+    <div class="ts-card">
+        <div class="ts-label">Match of the Week</div>
+        <div class="ts-val" style="color:var(--t1);font-size:16px;margin-top:2px">@Model.MotwText</div>
+        <div class="ts-team"><i class="bi bi-geo-alt" style="font-size:10px;margin-right:4px"></i>@Model.MotwStadium</div>
+    </div>
+
+</div>

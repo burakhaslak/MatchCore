@@ -1,0 +1,1303 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "PremierLeague.WebApi",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/FootballMatch": {
+      "get": {
+        "tags": [
+          "FootballMatch"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "FootballMatch"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFootballMatchDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFootballMatchDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateFootballMatchDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FootballMatch"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFootballMatchDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFootballMatchDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateFootballMatchDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/FootballMatch/{id}": {
+      "delete": {
+        "tags": [
+          "FootballMatch"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "FootballMatch"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/FootballMatch/GetMatchSummary/{id}": {
+      "get": {
+        "tags": [
+          "FootballMatch"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MatchEvent": {
+      "get": {
+        "tags": [
+          "MatchEvent"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "MatchEvent"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMatchEventDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMatchEventDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMatchEventDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MatchEvent"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMatchEventDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMatchEventDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMatchEventDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MatchEvent/{id}": {
+      "delete": {
+        "tags": [
+          "MatchEvent"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "MatchEvent"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MatchStatistic": {
+      "get": {
+        "tags": [
+          "MatchStatistic"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "MatchStatistic"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMatchStatisticDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMatchStatisticDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateMatchStatisticDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MatchStatistic"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMatchStatisticDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMatchStatisticDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateMatchStatisticDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/MatchStatistic/{id}": {
+      "delete": {
+        "tags": [
+          "MatchStatistic"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "MatchStatistic"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Season": {
+      "get": {
+        "tags": [
+          "Season"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Season"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSeasonDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSeasonDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSeasonDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Season"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSeasonDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSeasonDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSeasonDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Season/{id}": {
+      "delete": {
+        "tags": [
+          "Season"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Season"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Standings": {
+      "get": {
+        "tags": [
+          "Standings"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Team": {
+      "get": {
+        "tags": [
+          "Team"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Team"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTeamDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTeamDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTeamDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Team"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTeamDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTeamDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTeamDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Team/{id}": {
+      "delete": {
+        "tags": [
+          "Team"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Team"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Team/GetTeamForm/{id}": {
+      "get": {
+        "tags": [
+          "Team"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Week": {
+      "get": {
+        "tags": [
+          "Week"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Week"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWeekDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWeekDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateWeekDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Week"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateWeekDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateWeekDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateWeekDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Week/{id}": {
+      "delete": {
+        "tags": [
+          "Week"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Week"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CreateFootballMatchDto": {
+        "type": "object",
+        "properties": {
+          "weekId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homeTeamId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayTeamId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "matchDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "stadium": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstHalfScore": {
+            "type": "string",
+            "nullable": true
+          },
+          "attendance": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "referee": {
+            "type": "string",
+            "nullable": true
+          },
+          "isFeatured": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateMatchEventDto": {
+        "type": "object",
+        "properties": {
+          "footballMatchId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "actionType": {
+            "type": "string",
+            "nullable": true
+          },
+          "minute": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isHomeTeam": {
+            "type": "boolean"
+          },
+          "playerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "playerIn": {
+            "type": "string",
+            "nullable": true
+          },
+          "playerOut": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateMatchStatisticDto": {
+        "type": "object",
+        "properties": {
+          "footballMatchId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homeGoalsFirstHalf": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homeGoalsSecondHalf": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayGoalsFirstHalf": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayGoalsSecondHalf": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homePossession": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayPossession": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homeShots": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayShots": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homeShotsOnTarget": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayShotsOnTarget": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homePasses": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayPasses": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homePassAccuracy": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayPassAccuracy": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homeCorners": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayCorners": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homeFouls": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayFouls": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homeOffsides": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayOffsides": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homeYellowCards": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayYellowCards": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homeRedCards": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayRedCards": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateSeasonDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "startYear": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "endYear": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateTeamDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "shortName": {
+            "type": "string",
+            "nullable": true
+          },
+          "stadium": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "logoUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "foundedYear": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateWeekDto": {
+        "type": "object",
+        "properties": {
+          "weekNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "seasonId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateFootballMatchDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "weekId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homeTeamId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayTeamId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "matchDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "stadium": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "firstHalfScore": {
+            "type": "string",
+            "nullable": true
+          },
+          "attendance": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "referee": {
+            "type": "string",
+            "nullable": true
+          },
+          "isFeatured": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateMatchEventDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "footballMatchId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "actionType": {
+            "type": "string",
+            "nullable": true
+          },
+          "minute": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isHomeTeam": {
+            "type": "boolean"
+          },
+          "playerName": {
+            "type": "string",
+            "nullable": true
+          },
+          "playerIn": {
+            "type": "string",
+            "nullable": true
+          },
+          "playerOut": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateMatchStatisticDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "footballMatchId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homeGoalsFirstHalf": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homeGoalsSecondHalf": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayGoalsFirstHalf": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayGoalsSecondHalf": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homePossession": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayPossession": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homeShots": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayShots": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homeShotsOnTarget": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayShotsOnTarget": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homePasses": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayPasses": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homePassAccuracy": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayPassAccuracy": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homeCorners": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayCorners": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homeFouls": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayFouls": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homeOffsides": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayOffsides": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homeYellowCards": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayYellowCards": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "homeRedCards": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "awayRedCards": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateSeasonDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "startYear": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "endYear": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isActive": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateTeamDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "shortName": {
+            "type": "string",
+            "nullable": true
+          },
+          "stadium": {
+            "type": "string",
+            "nullable": true
+          },
+          "city": {
+            "type": "string",
+            "nullable": true
+          },
+          "logoUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "foundedYear": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateWeekDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "weekNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "endDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "seasonId": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

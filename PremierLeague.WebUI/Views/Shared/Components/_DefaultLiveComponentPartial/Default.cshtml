@@ -1,0 +1,39 @@
+﻿@model List<PremierLeague.DtoLayer.FootballMatchDtos.ResultFootballMatchDto>
+@if (Model != null && Model.Any())
+{
+    <div class="sec-ttl mcw-section" data-s="live">🔴 &nbsp;Lıve Matches</div>
+
+    @foreach (var item in Model)
+    {
+        <div class="mc-wrap mcw" data-s="live">
+            <div class="mc live lp">
+                <div class="mc-time">
+                    <div class="mc-min lc">LIVE</div>
+                    <div class="sbadge sb-live"><span class="live-dot"></span>LIVE</div>
+                </div>
+                <div class="dvv"></div>
+                <div class="mc-teams">
+
+                    <div class="mc-tr">
+                        <div class="tl-sm">
+                            <img src="@item.HomeTeamLogo" alt="@item.HomeTeamName" onerror="this.parentNode.textContent='@item.HomeTeamName'" />
+                        </div>
+                        <span class="tn">@item.HomeTeamName</span>
+                        <span class="ts @(item.HomeScore > item.AwayScore ? "win" : "")">@item.HomeScore</span>
+                    </div>
+
+                    <div class="mc-tr">
+                        <div class="tl-sm">
+                            <img src="@item.AwayTeamLogo" alt="@item.AwayTeamName" onerror="this.parentNode.textContent='@item.AwayTeamName'" />
+                        </div>
+                        <span class="tn">@item.AwayTeamName</span>
+                        <span class="ts @(item.AwayScore > item.HomeScore ? "win" : "")">@item.AwayScore</span>
+                    </div>
+
+                </div>
+
+                <a href="/Match/Detail/@item.Id" class="det-btn"><i class="bi bi-chevron-right"></i> <span>Details</span></a>
+            </div>
+        </div>
+    }
+}

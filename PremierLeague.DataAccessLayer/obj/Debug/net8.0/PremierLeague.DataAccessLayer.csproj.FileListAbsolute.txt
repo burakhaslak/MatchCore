@@ -1,0 +1,17 @@
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DataAccessLayer\bin\Debug\net8.0\PremierLeague.DataAccessLayer.deps.json
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DataAccessLayer\bin\Debug\net8.0\PremierLeague.DataAccessLayer.dll
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DataAccessLayer\bin\Debug\net8.0\PremierLeague.DataAccessLayer.pdb
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DataAccessLayer\bin\Debug\net8.0\PremierLeague.EntityLayer.dll
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DataAccessLayer\bin\Debug\net8.0\PremierLeague.EntityLayer.pdb
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DataAccessLayer\obj\Debug\net8.0\PremierLeague.DataAccessLayer.csproj.AssemblyReference.cache
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DataAccessLayer\obj\Debug\net8.0\PremierLeague.DataAccessLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DataAccessLayer\obj\Debug\net8.0\PremierLeague.DataAccessLayer.AssemblyInfoInputs.cache
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DataAccessLayer\obj\Debug\net8.0\PremierLeague.DataAccessLayer.AssemblyInfo.cs
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DataAccessLayer\obj\Debug\net8.0\PremierLeague.DataAccessLayer.csproj.CoreCompileInputs.cache
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DataAccessLayer\obj\Debug\net8.0\PremierL.43C5D3B1.Up2Date
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DataAccessLayer\obj\Debug\net8.0\PremierLeague.DataAccessLayer.dll
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DataAccessLayer\obj\Debug\net8.0\refint\PremierLeague.DataAccessLayer.dll
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DataAccessLayer\obj\Debug\net8.0\PremierLeague.DataAccessLayer.pdb
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DataAccessLayer\obj\Debug\net8.0\ref\PremierLeague.DataAccessLayer.dll
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DataAccessLayer\bin\Debug\net8.0\PremierLeague.DtoLayer.dll
+C:\Users\burakhaslak\source\repos\PremierLeague\PremierLeague.DataAccessLayer\bin\Debug\net8.0\PremierLeague.DtoLayer.pdb

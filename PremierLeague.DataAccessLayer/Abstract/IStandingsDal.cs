@@ -1,0 +1,14 @@
+﻿using PremierLeague.DtoLayer.StandingDto;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PremierLeague.DataAccessLayer.Abstract
+{
+    public interface IStandingsDal
+    {
+        List<ResultStandingsDto> GetStandings();
+    }
+}

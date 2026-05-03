@@ -1,0 +1,24 @@
+﻿@model PremierLeague.WebUI.Models.StandingsHeaderViewModel
+
+<section class="pg-head">
+    <div class="wrap">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <div class="pg-badge"><i class="bi bi-trophy-fill"></i> Premier League</div>
+                <h1 class="pg-title">League <span style="color:var(--green)">Standings</span></h1>
+
+                <!-- DİNAMİK KISIM BURASI -->
+                <p class="pg-sub">@Model.SeasonName Season &nbsp;·&nbsp; Matchweek @Model.ActiveWeek</p>
+
+            </div>
+            <div class="col-lg-4 mt-3 mt-lg-0">
+                <div class="legend">
+                    <div class="leg-item"><div class="leg-dot" style="background:rgba(255,214,0,.8)"></div>Champion</div>
+                    <div class="leg-item"><div class="leg-dot" style="background:var(--green)"></div>Champions League</div>
+                    <div class="leg-item"><div class="leg-dot" style="background:var(--blue)"></div>Europa League</div>
+                    <div class="leg-item"><div class="leg-dot" style="background:var(--live)"></div>Relegation</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

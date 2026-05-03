@@ -1,0 +1,40 @@
+﻿@model PremierLeague.WebUI.Models.LeagueHeaderViewModel
+
+<section class="lg-head">
+    <div class="wrap">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <div class="lg-badge"><i class="bi bi-trophy-fill"></i> Premier League</div>
+                <h1 class="lg-title">Week <span style="color:var(--green)">@Model.Week</span> Results</h1>
+                <p class="lg-sub">@Model.DateRange &nbsp;·&nbsp; @Model.TotalMatches Matches</p>
+            </div>
+            <div class="col-lg-5 d-none d-lg-block">
+                <div class="lg-stats">
+                    <div style="text-align:center">
+                        <div class="ls-num">@Model.LiveCount</div>
+                        <div class="ls-lbl">Live</div>
+                    </div>
+                    <div style="text-align:center">
+                        <div class="ls-num">@Model.FinishedCount</div>
+                        <div class="ls-lbl">Finished</div>
+                    </div>
+                    <div style="text-align:center">
+                        <div class="ls-num">@Model.UpcomingCount</div>
+                        <div class="ls-lbl">Upcoming</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="ftabs-wrap">
+    <div class="wrap">
+        <div class="ftabs">
+            <button class="ftab active" data-f="all">All Matches</button>
+            <button class="ftab" data-f="live"><span class="live-dot"></span>Lıve<span class="bcnt">@Model.LiveCount</span></button>
+            <button class="ftab" data-f="finished">Fınıshed</button>
+            <button class="ftab" data-f="upcoming">Upcomıng</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,176 @@
+﻿@model List<ResultMatchStatisticDto>
+@{
+    ViewData["Title"] = "MatchStatisticList";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+
+<style>
+    .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+    }
+
+    .card-header {
+        padding: 20px 24px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .card-title {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin: 0;
+    }
+
+    .btn-primary {
+        background: var(--accent);
+        color: #fff;
+        padding: 8px 16px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 600;
+        transition: background 0.2s;
+    }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            color: #fff;
+        }
+
+    .table-wrap {
+        overflow-x: auto;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0;
+        font-size: 13px;
+    }
+
+        .table th {
+            background: rgba(255,255,255,0.02);
+            padding: 14px 24px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 11px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .table td {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-primary);
+            vertical-align: middle;
+        }
+
+        .table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table tr:hover td {
+            background: rgba(255,255,255,0.01);
+        }
+
+    .stat-badge {
+        background: rgba(255,255,255,0.05);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-weight: 600;
+        font-size: 12px;
+        margin-right: 4px;
+        display: inline-block;
+        min-width: 45px;
+        text-align: center;
+    }
+
+    .home-stat {
+        border-left: 2px solid #00e676;
+    }
+    /* Green indicator for Home */
+    .away-stat {
+        border-left: 2px solid #ff1744;
+    }
+    /* Red indicator for Away */
+
+    .action-links a {
+        text-decoration: none;
+        font-weight: 600;
+        margin-right: 12px;
+        font-size: 12px;
+    }
+
+    .btn-edit {
+        color: #2979ff;
+    }
+
+    .btn-delete {
+        color: #ff1744;
+    }
+
+    .action-links a:hover {
+        opacity: 0.8;
+    }
+</style>
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Match Statistics</h3>
+        <a href="/MatchStatistic/CreateMatchStatistic" class="btn-primary">+ Add New Statistic</a>
+    </div>
+
+    <div class="table-wrap">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Match ID</th>
+                    <th>Possession (H - A)</th>
+                    <th>Shots (H - A)</th>
+                    <th>Shots on Target (H - A)</th>
+                    <th>Pass Accuracy (H - A)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td><strong>#@item.FootballMatchId</strong></td>
+                        <td>
+                            <span class="stat-badge home-stat">@item.HomePossession%</span>
+                            <span class="stat-badge away-stat">@item.AwayPossession%</span>
+                        </td>
+                        <td>
+                            <span class="stat-badge home-stat">@item.HomeShots</span>
+                            <span class="stat-badge away-stat">@item.AwayShots</span>
+                        </td>
+                        <td>
+                            <span class="stat-badge home-stat">@item.HomeShotsOnTarget</span>
+                            <span class="stat-badge away-stat">@item.AwayShotsOnTarget</span>
+                        </td>
+                        <td>
+                            <span class="stat-badge home-stat">@item.HomePassAccuracy%</span>
+                            <span class="stat-badge away-stat">@item.AwayPassAccuracy%</span>
+                        </td>
+                        <td class="action-links">
+                            <a href="/MatchStatistic/UpdateMatchStatistic/@item.Id" class="btn-edit">Edit</a>
+                            <a href="/MatchStatistic/DeleteMatchStatistic/@item.Id" class="btn-delete" onclick="return confirm('Are you sure you want to delete these statistics?');">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
